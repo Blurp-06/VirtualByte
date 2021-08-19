@@ -1,0 +1,43 @@
+VirtualByte is a jvm like application.
+
+All arguments must be integers and they will be stored this way.
+arguments must follow this structure:
+	-command arg(int) arg(int)
+	-command
+
+example:
+	-show_int 420 69
+	-show_newline
+
+
+String litterals are one of the most useful syntax in Virtual Byte.
+You can make a string litteral by using quotes.
+example (prints hello world):
+	show_str "Hello world!
+
+you could also do:
+	show_str "Hello world!"
+
+This way one can add arguments behind the string.
+Before parsing strings will be converted to integers, so these are the same.
+	show_str 72 101 108 108 111 32 119 111 114 108 100
+	show_str "Hello world
+	show_str "Hello worl" 100
+
+
+The . (dot) operator is a special argument.
+example (adds 2 numbers and prints it out):
+	add 2 3
+	show_int .
+
+Some action will put a value in the dot operator.
+
+
+Comments are done like this.
+There can only be comments on a line without actions.
+Good example:
+	; This is a comment
+	quit 0
+
+Bad example:
+	quit 0 ; This is a not working comment, will result in error.

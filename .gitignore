@@ -1,0 +1,7 @@
+*
+!.gitignore
+!*.cpp
+!*.h
+!STANDARD.txt
+!DOC.json
+!VirtualByte.sln

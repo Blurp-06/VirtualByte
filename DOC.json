@@ -1,0 +1,103 @@
+{
+    "add": {
+        "description": "Adds 2 numbers.",
+        "args": {
+            "x": "Number to add to.",
+            "y": "Number to be added to x."
+        },
+        "dot": true
+    },
+    "sub": {
+        "description": "Subtracts 2 numbers.",
+        "args": {
+            "x": "Number to subtract to.",
+            "y": "Number to be substracted to x."
+        },
+        "dot": true
+    },
+    "show_str": {
+        "description": "Shows a string on the screen.",
+        "args": {
+            "unlimited": "ASCII codes for letters."
+        },
+        "dot": false
+    },
+    "show_int": {
+        "description": "Shows numbers on the screen.",
+        "args": {
+            "unlimited": "Numbers to be outputted."
+        },
+        "dot": false
+    },
+    "show_mem_str": {
+        "description": "Shows values of memory addresses as string.",
+        "args": {
+            "unlimited": "Memory addresses of ASCII codes to be outputted."
+        },
+        "dot": false
+    },
+    "show_mem_int": {
+        "description": "Shows values of memory addresses as integers.",
+        "args": {
+            "unlimited": "Memory addresses of numbers to be outputted."
+        },
+        "dot": false
+    },
+    "mem_init": {
+      "description": "Initialises memory of given size.",
+        "args": {
+            "x": "Amount of memory addresses to make."
+        },
+        "dot": false
+    },
+    "mem_destruct": {
+      "description":"Frees the memory and makes it no longer useable (Should be called at the end of a program).",
+        "args": false,
+        "dot": false
+    },
+    "mem_dot": {
+      "description": "Puts memory addresses value into dot operator.",
+        "args": {
+            "x": "Memory address to put in dot"
+        },
+        "dot": false
+    },
+    "mem_set": {
+      "description": "Sets specific memory address to the value of y.",
+        "args": {
+            "x": "Memory address to put y into.",
+            "y": "Value to put in x."
+        },
+        "dot": false
+    },
+    "mem_add": {
+      "description": "Adds 2 memory addresses and puts it into the 3rd one.",
+        "args": {
+            "x": "Memory address of first number.",
+            "y": "Memory address of second number.",
+            "z": "Result of addition."
+        },
+        "dot": false
+    },
+    "mem_sub": {
+      "description": "Subtracts 2 memory addresses and puts it into the 3rd one.",
+        "args": {
+            "x": "Memory address of first number.",
+            "y": "Memory address of second number.",
+            "z": "Result of substraction."
+        },
+        "dot": false
+    },
+    "pause": {
+      "description": "Pauses the program.",
+        "args": false,
+        "dot": false
+    },
+    "quit": {
+      "description": "Exits the program with the given exit code.",
+        "args": {
+            "x": "Exit code of the program."
+        },
+        "dot": false
+    }
+}
