@@ -1,4 +1,61 @@
 {
+    "label": {
+        "description": "Puts a label to jump to.",
+        "args": {
+            "x": "Number ID of label."
+        },
+        "dot": false
+    },
+    "jmp": {
+        "description": "Jumps to a label that has already been reached.",
+        "args": {
+            "x": "Number ID of label to jump to."
+        },
+        "dot": false
+    },
+    "jmp_if": {
+        "description": "Jumps to a label if y == z",
+        "args": {
+            "x": "Number ID of label to jump to.",
+            "y": "Value to hold against z",
+            "z": "Value to hold against y"
+        },
+        "dot": false
+    },
+    "jmp_ifn": {
+        "description": "Jumps to a label if y != z",
+        "args": {
+            "x": "Number ID of label to jump to.",
+            "y": "Value to hold against z",
+            "z": "Value to hold against y"
+        },
+        "dot": false
+    },
+    "jmp_skip": {
+        "description": "Jumps forwards or backwards a few amount of lines.",
+        "args": {
+            "x": "Amount of lines to jump."
+        },
+        "dot": false
+    },
+    "jmp_skip_if": {
+        "description": "Skips lines if y == z",
+        "args": {
+            "x": "Amount of labels to skip.",
+            "y": "Value to hold against z",
+            "z": "Value to hold against y"
+        },
+        "dot": false
+    },
+    "jmp_skip_ifn": {
+        "description": "Skips lines if y != z",
+        "args": {
+            "x": "Amount of lines to skip.",
+            "y": "Value to hold against z",
+            "z": "Value to hold against y"
+        },
+        "dot": false
+    },
     "add": {
         "description": "Adds 2 numbers.",
         "args": {
@@ -43,27 +100,32 @@
         },
         "dot": false
     },
+    "get_char":{
+        "description": "Gets one char input from keyboard.",
+        "args": false,
+        "dot": true
+    },
     "mem_init": {
-      "description": "Initialises memory of given size.",
+        "description": "Initialises memory of given size.",
         "args": {
             "x": "Amount of memory addresses to make."
         },
         "dot": false
     },
     "mem_destruct": {
-      "description":"Frees the memory and makes it no longer useable (Should be called at the end of a program).",
+        "description": "Frees the memory and makes it no longer useable (Should be called at the end of a program).",
         "args": false,
         "dot": false
     },
     "mem_dot": {
-      "description": "Puts memory addresses value into dot operator.",
+        "description": "Puts memory addresses value into dot operator.",
         "args": {
             "x": "Memory address to put in dot"
         },
         "dot": false
     },
     "mem_set": {
-      "description": "Sets specific memory address to the value of y.",
+        "description": "Sets specific memory address to the value of y.",
         "args": {
             "x": "Memory address to put y into.",
             "y": "Value to put in x."
@@ -71,7 +133,7 @@
         "dot": false
     },
     "mem_add": {
-      "description": "Adds 2 memory addresses and puts it into the 3rd one.",
+        "description": "Adds 2 memory addresses and puts it into the 3rd one.",
         "args": {
             "x": "Memory address of first number.",
             "y": "Memory address of second number.",
@@ -80,7 +142,7 @@
         "dot": false
     },
     "mem_sub": {
-      "description": "Subtracts 2 memory addresses and puts it into the 3rd one.",
+        "description": "Subtracts 2 memory addresses and puts it into the 3rd one.",
         "args": {
             "x": "Memory address of first number.",
             "y": "Memory address of second number.",
@@ -89,12 +151,12 @@
         "dot": false
     },
     "pause": {
-      "description": "Pauses the program.",
+        "description": "Pauses the program.",
         "args": false,
         "dot": false
     },
     "quit": {
-      "description": "Exits the program with the given exit code.",
+        "description": "Exits the program with the given exit code.",
         "args": {
             "x": "Exit code of the program."
         },

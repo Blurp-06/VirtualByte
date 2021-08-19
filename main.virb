@@ -1,0 +1,15 @@
+; Truth machine, if 0 print , if 1 print 1 infinitly
+
+; Gets a or b from user.
+show_str "Please type 0 or 1: "
+get_char
+show_newline
+
+jmp_skip_if 2 . "1"
+show_str "0"
+jmp_skip 3
+label 1
+show_str "1"
+jmp 1
+
+pause

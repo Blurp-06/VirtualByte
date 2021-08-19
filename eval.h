@@ -6,8 +6,10 @@
 #include "tools.h"
 #include "parser.h"
 #include "virtualMemory.h"
+#include "executor.h"
+#include <conio.h>
 
-void virtualByteEval(ParsedLine line);
+int virtualByteEval(ParsedLine line);
 void initActions();
 unsigned int getLinesEvaled();
 

@@ -5,19 +5,20 @@
 static std::map<std::string, void(*)(std::vector<int>)> actions;
 static unsigned int linesEvaled = 0;
 static int dotValue = 0;
+static std::map<int, int> labels;
 
 unsigned int getLinesEvaled()
 {
 	return linesEvaled;
 }
-void virtualByteEval(ParsedLine line)
+int virtualByteEval(ParsedLine line)
 {
 	void(*function)(std::vector<int>);
 	linesEvaled++;
 
 	if (line.isEmpty)
 	{
-		return;
+		return getCurrentLine() + 1;
 	}
 
 	if (line.dotPos != -1)
@@ -33,6 +34,78 @@ void virtualByteEval(ParsedLine line)
 	catch (const std::exception&)
 	{
 		throwError("No action named " + line.action, linesEvaled);
+	}
+
+	return getCurrentLine() + 1;
+}
+
+// Recursion.
+void label(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(1);
+	labels[args[0]] = getCurrentLine();
+}
+void jmp(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(1);
+
+	if (labels.count(args[0]) == 0)
+	{
+		throwError("Label not found.", getCurrentLine() + 1);
+	}
+
+	gotoLine(labels[args[0]]);
+}
+void jmp_if(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(3);
+
+	if (labels.count(args[0]) == 0)
+	{
+		throwError("Label not found.", getCurrentLine() + 1);
+	}
+
+	if (args[1] == args[2])
+	{
+		gotoLine(labels[args[0]]);
+	}
+}
+void jmp_ifn(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(3);
+
+	if (labels.count(args[0]) == 0)
+	{
+		throwError("Label not found.", getCurrentLine() + 1);
+	}
+
+	if (args[1] != args[2])
+	{
+		gotoLine(labels[args[0]]);
+	}
+}
+void jmp_skip(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(1);
+	
+	gotoLine(getCurrentLine() + args[0]);
+}
+void jmp_skip_if(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(3);
+
+	if (args[1] == args[2])
+	{
+		gotoLine(getCurrentLine() + args[0]);
+	}
+}
+void jmp_skip_ifn(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(3);
+
+	if (args[1] != args[2])
+	{
+		gotoLine(getCurrentLine() + args[0]);
 	}
 }
 
@@ -81,6 +154,14 @@ void show_mem_int(std::vector<int> args)
 	{
 		std::cout << getMemory(args[i]);
 	}
+}
+
+// Get commands (gets user input).
+void get_char(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(0);
+	char c = _getch();
+	dotValue = (int)c;
 }
 
 // Memory operations.
@@ -135,6 +216,13 @@ void quit(std::vector<int> args)
 
 void initActions()
 {
+	REGISTER_ACTION(label);
+	REGISTER_ACTION(jmp);
+	REGISTER_ACTION(jmp_if);
+	REGISTER_ACTION(jmp_ifn);
+	REGISTER_ACTION(jmp_skip);
+	REGISTER_ACTION(jmp_skip_if);
+	REGISTER_ACTION(jmp_skip_ifn);
 	REGISTER_ACTION(add);
 	REGISTER_ACTION(sub);
 	REGISTER_ACTION(show_str);
@@ -142,6 +230,7 @@ void initActions()
 	REGISTER_ACTION(show_newline);
 	REGISTER_ACTION(show_mem_str);
 	REGISTER_ACTION(show_mem_int);
+	REGISTER_ACTION(get_char);
 	REGISTER_ACTION(mem_init);
 	REGISTER_ACTION(mem_destruct);
 	REGISTER_ACTION(mem_dot);
