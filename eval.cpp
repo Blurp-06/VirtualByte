@@ -5,8 +5,22 @@
 static std::map<std::string, void(*)(std::vector<int>)> actions;
 static unsigned int linesEvaled = 0;
 static int dotValue = 0;
+static bool dotHasValue = false;
 static std::map<int, int> labels;
 
+static void setDot(int value)
+{
+	dotHasValue = true;
+	dotValue = value;
+}
+static int getDot()
+{
+	if (dotHasValue)
+	{
+		return dotValue;
+	}
+	throwError("Dot doesn't have a value.", getCurrentLine());
+}
 unsigned int getLinesEvaled()
 {
 	return linesEvaled;
@@ -23,7 +37,7 @@ int virtualByteEval(ParsedLine line)
 
 	if (line.dotPos != -1)
 	{
-		line.args[line.dotPos] = dotValue;
+		line.args[line.dotPos] = getDot();
 	}
 
 	try
@@ -113,12 +127,24 @@ void jmp_skip_ifn(std::vector<int> args)
 void add(std::vector<int> args)
 {
 	ARGUMENT_SIZE_CHECK(2);
-	dotValue = args[0] + args[1];
+	setDot(args[0] + args[1]);
 }
 void sub(std::vector<int> args)
 {
 	ARGUMENT_SIZE_CHECK(2);
-	dotValue = args[0] - args[1];
+	setDot(args[0] - args[1]);
+}
+
+// Dot operations.
+void dot_clear(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(0);
+	dotHasValue = false;
+}
+void dot_set(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(1);
+	setDot(args[0]);
 }
 
 // Show commands (printing to the screen).
@@ -161,7 +187,7 @@ void get_char(std::vector<int> args)
 {
 	ARGUMENT_SIZE_CHECK(0);
 	char c = _getch();
-	dotValue = (int)c;
+	setDot((int)c);
 }
 
 // Memory operations.
@@ -225,6 +251,8 @@ void initActions()
 	REGISTER_ACTION(jmp_skip_ifn);
 	REGISTER_ACTION(add);
 	REGISTER_ACTION(sub);
+	REGISTER_ACTION(dot_clear);
+	REGISTER_ACTION(dot_set);
 	REGISTER_ACTION(show_str);
 	REGISTER_ACTION(show_int);
 	REGISTER_ACTION(show_newline);

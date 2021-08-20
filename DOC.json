@@ -72,6 +72,18 @@
         },
         "dot": true
     },
+    "dot_clear": {
+        "description": "Clears the dot value.",
+        "args": false,
+        "dot": true
+    },
+    "dot_set": {
+        "description": "Sets the value of the dot.",
+        "args": {
+            "x": "The value to insert in the dot."
+        },
+        "dot": true
+    },
     "show_str": {
         "description": "Shows a string on the screen.",
         "args": {
@@ -100,7 +112,7 @@
         },
         "dot": false
     },
-    "get_char":{
+    "get_char": {
         "description": "Gets one char input from keyboard.",
         "args": false,
         "dot": true
