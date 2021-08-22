@@ -5,7 +5,6 @@
 #include "eval.h"
 #include "executor.h"
 
-#define DEBUG
 
 int main(int argc, char* argv[])
 {
