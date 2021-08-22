@@ -11,7 +11,12 @@ Note for people making Virtual Byte extensions:
 // Return a string with the names of the functions like this: "functionA|functionB"
 // Don't add spaces or anything else, there should only be a '|' between function names.
 // Remember to spell them correctly.
-extern "C" API const char* initActionsExt();
+extern "C" API const char *initActionsExt();
 
 // To add a function to VirtualByte do this:
 // extern "C" API void functionA(int args[], int* dotValue);
+
+// To include this dll in the code one should add the line:
+//	get_dll "Path to file"
+// ; Calling the function
+//	#functionA 1 2 3
