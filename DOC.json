@@ -1,184 +1,201 @@
 {
-    "label": {
-        "description": "Puts a label to jump to.",
-        "args": {
-            "x": "Number ID of label."
-        },
-        "dot": false
+  "label": {
+    "description": "Puts a label to jump to.",
+    "args": {
+      "x": "Number ID of label."
     },
-    "jmp": {
-        "description": "Jumps to a label that has already been reached.",
-        "args": {
-            "x": "Number ID of label to jump to."
-        },
-        "dot": false
+    "dot": false
+  },
+  "jmp": {
+    "description": "Jumps to a label that has already been reached.",
+    "args": {
+      "x": "Number ID of label to jump to."
     },
-    "jmp_if": {
-        "description": "Jumps to a label if y == z",
-        "args": {
-            "x": "Number ID of label to jump to.",
-            "y": "Value to hold against z",
-            "z": "Value to hold against y"
-        },
-        "dot": false
+    "dot": false
+  },
+  "jmp_if": {
+    "description": "Jumps to a label if y == z",
+    "args": {
+      "x": "Number ID of label to jump to.",
+      "y": "Value to hold against z",
+      "z": "Value to hold against y"
     },
-    "jmp_ifn": {
-        "description": "Jumps to a label if y != z",
-        "args": {
-            "x": "Number ID of label to jump to.",
-            "y": "Value to hold against z",
-            "z": "Value to hold against y"
-        },
-        "dot": false
+    "dot": false
+  },
+  "jmp_ifn": {
+    "description": "Jumps to a label if y != z",
+    "args": {
+      "x": "Number ID of label to jump to.",
+      "y": "Value to hold against z",
+      "z": "Value to hold against y"
     },
-    "jmp_skip": {
-        "description": "Jumps forwards or backwards a few amount of lines.",
-        "args": {
-            "x": "Amount of lines to jump."
-        },
-        "dot": false
+    "dot": false
+  },
+  "jmp_skip": {
+    "description": "Jumps forwards or backwards a few amount of lines.",
+    "args": {
+      "x": "Amount of lines to jump."
     },
-    "jmp_skip_if": {
-        "description": "Skips lines if y == z",
-        "args": {
-            "x": "Amount of labels to skip.",
-            "y": "Value to hold against z",
-            "z": "Value to hold against y"
-        },
-        "dot": false
+    "dot": false
+  },
+  "jmp_skip_if": {
+    "description": "Skips lines if y == z",
+    "args": {
+      "x": "Amount of labels to skip.",
+      "y": "Value to hold against z",
+      "z": "Value to hold against y"
     },
-    "jmp_skip_ifn": {
-        "description": "Skips lines if y != z",
-        "args": {
-            "x": "Amount of lines to skip.",
-            "y": "Value to hold against z",
-            "z": "Value to hold against y"
-        },
-        "dot": false
+    "dot": false
+  },
+  "jmp_skip_ifn": {
+    "description": "Skips lines if y != z",
+    "args": {
+      "x": "Amount of lines to skip.",
+      "y": "Value to hold against z",
+      "z": "Value to hold against y"
     },
-    "add": {
-        "description": "Adds 2 numbers.",
-        "args": {
-            "x": "Number to add to.",
-            "y": "Number to be added to x."
-        },
-        "dot": true
+    "dot": false
+  },
+  "add": {
+    "description": "Adds 2 numbers.",
+    "args": {
+      "x": "Number to add to.",
+      "y": "Number to be added to x."
     },
-    "sub": {
-        "description": "Subtracts 2 numbers.",
-        "args": {
-            "x": "Number to subtract to.",
-            "y": "Number to be substracted to x."
-        },
-        "dot": true
+    "dot": true
+  },
+  "sub": {
+    "description": "Subtracts 2 numbers.",
+    "args": {
+      "x": "Number to subtract to.",
+      "y": "Number to be substracted to x."
     },
-    "dot_clear": {
-        "description": "Clears the dot value.",
-        "args": false,
-        "dot": true
+    "dot": true
+  },
+  "mod": {
+    "description": "Modulo 2 numbers.",
+    "args": {
+      "x": "Base number of x mod y.",
+      "y": "Divider of x mod y."
     },
-    "dot_set": {
-        "description": "Sets the value of the dot.",
-        "args": {
-            "x": "The value to insert in the dot."
-        },
-        "dot": true
+    "dot": true
+  },
+  "dot_clear": {
+    "description": "Clears the dot value.",
+    "args": false,
+    "dot": true
+  },
+  "dot_set": {
+    "description": "Sets the value of the dot.",
+    "args": {
+      "x": "The value to insert in the dot."
     },
-    "show_str": {
-        "description": "Shows a string on the screen.",
-        "args": {
-            "unlimited": "ASCII codes for letters."
-        },
-        "dot": false
+    "dot": true
+  },
+  "show_str": {
+    "description": "Shows a string on the screen.",
+    "args": {
+      "unlimited": "ASCII codes for letters."
     },
-    "show_int": {
-        "description": "Shows numbers on the screen.",
-        "args": {
-            "unlimited": "Numbers to be outputted."
-        },
-        "dot": false
+    "dot": false
+  },
+  "show_int": {
+    "description": "Shows numbers on the screen.",
+    "args": {
+      "unlimited": "Numbers to be outputted."
     },
-    "show_mem_str": {
-        "description": "Shows values of memory addresses as string.",
-        "args": {
-            "unlimited": "Memory addresses of ASCII codes to be outputted."
-        },
-        "dot": false
+    "dot": false
+  },
+  "show_mem_str": {
+    "description": "Shows values of memory addresses as string.",
+    "args": {
+      "unlimited": "Memory addresses of ASCII codes to be outputted."
     },
-    "show_mem_int": {
-        "description": "Shows values of memory addresses as integers.",
-        "args": {
-            "unlimited": "Memory addresses of numbers to be outputted."
-        },
-        "dot": false
+    "dot": false
+  },
+  "show_mem_int": {
+    "description": "Shows values of memory addresses as integers.",
+    "args": {
+      "unlimited": "Memory addresses of numbers to be outputted."
     },
-    "get_char": {
-        "description": "Gets one char input from keyboard.",
-        "args": false,
-        "dot": true
+    "dot": false
+  },
+  "get_char": {
+    "description": "Gets one char input from keyboard.",
+    "args": false,
+    "dot": true
+  },
+  "mem_init": {
+    "description": "Initialises memory of given size.",
+    "args": {
+      "x": "Amount of memory addresses to make."
     },
-    "mem_init": {
-        "description": "Initialises memory of given size.",
-        "args": {
-            "x": "Amount of memory addresses to make."
-        },
-        "dot": false
+    "dot": false
+  },
+  "mem_destruct": {
+    "description": "Frees the memory and makes it no longer useable (Should be called at the end of a program).",
+    "args": false,
+    "dot": false
+  },
+  "mem_dot": {
+    "description": "Puts memory addresses value into dot operator.",
+    "args": {
+      "x": "Memory address to put in dot"
     },
-    "mem_destruct": {
-        "description": "Frees the memory and makes it no longer useable (Should be called at the end of a program).",
-        "args": false,
-        "dot": false
+    "dot": false
+  },
+  "mem_set": {
+    "description": "Sets specific memory address to the value of y.",
+    "args": {
+      "x": "Memory address to put y into.",
+      "y": "Value to put in x."
     },
-    "mem_dot": {
-        "description": "Puts memory addresses value into dot operator.",
-        "args": {
-            "x": "Memory address to put in dot"
-        },
-        "dot": false
+    "dot": false
+  },
+  "mem_add": {
+    "description": "Adds 2 memory addresses and puts it into the 3rd one.",
+    "args": {
+      "x": "Memory address of first number.",
+      "y": "Memory address of second number.",
+      "z": "Result of addition."
     },
-    "mem_set": {
-        "description": "Sets specific memory address to the value of y.",
-        "args": {
-            "x": "Memory address to put y into.",
-            "y": "Value to put in x."
-        },
-        "dot": false
+    "dot": false
+  },
+  "mem_sub": {
+    "description": "Subtracts 2 memory addresses and puts it into the 3rd one.",
+    "args": {
+      "x": "Memory address of first number.",
+      "y": "Memory address of second number.",
+      "z": "Result of substraction."
     },
-    "mem_add": {
-        "description": "Adds 2 memory addresses and puts it into the 3rd one.",
-        "args": {
-            "x": "Memory address of first number.",
-            "y": "Memory address of second number.",
-            "z": "Result of addition."
-        },
-        "dot": false
+    "dot": false
+  },
+  "mem_mod": {
+    "description": "Modulo 2 memory addresses and puts it into the 3rd one.",
+    "args": {
+      "x": "Memory address of first number.",
+      "y": "Memory address of second number.",
+      "z": "Result of modulo."
     },
-    "mem_sub": {
-        "description": "Subtracts 2 memory addresses and puts it into the 3rd one.",
-        "args": {
-            "x": "Memory address of first number.",
-            "y": "Memory address of second number.",
-            "z": "Result of substraction."
-        },
-        "dot": false
+    "dot": false
+  },
+  "get_dll": {
+    "description": "Puts a given dll into the scope.",
+    "args": {
+      "unlimited": "The ascii codes for the dll path."
     },
-    "get_dll": {
-        "description": "Puts a given dll into the scope.",
-        "args": {
-            "unlimited": "The ascii codes for the dll path."
-        },
-        "dot": false
+    "dot": false
+  },
+  "pause": {
+    "description": "Pauses the program until key is pressed.",
+    "args": false,
+    "dot": false
+  },
+  "quit": {
+    "description": "Exits the program with the given exit code, should be called if your program uses a dll.",
+    "args": {
+      "x": "Exit code of the program."
     },
-    "pause": {
-        "description": "Pauses the program until key is pressed.",
-        "args": false,
-        "dot": false
-    },
-    "quit": {
-        "description": "Exits the program with the given exit code, should be called if your program uses a dll.",
-        "args": {
-            "x": "Exit code of the program."
-        },
-        "dot": false
-    }
+    "dot": false
+  }
 }

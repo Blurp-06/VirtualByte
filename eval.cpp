@@ -149,6 +149,11 @@ void sub(std::vector<int> args)
 	ARGUMENT_SIZE_CHECK(2);
 	setDot(args[0] - args[1]);
 }
+void mod(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(2);
+	setDot(args[0] % args[1]);
+}
 
 // Dot operations.
 void dot_clear(std::vector<int> args)
@@ -237,6 +242,12 @@ void mem_sub(std::vector<int> args)
 {
 	ARGUMENT_SIZE_CHECK(3);
 	int value = getMemory(args[0]) - getMemory(args[1]);
+	setMemory(args[2], value);
+}
+void mem_mod(std::vector<int> args)
+{
+	ARGUMENT_SIZE_CHECK(3);
+	int value = getMemory(args[0]) % getMemory(args[1]);
 	setMemory(args[2], value);
 }
 
@@ -328,6 +339,7 @@ void initActions()
 	REGISTER_ACTION(jmp_skip_ifn);
 	REGISTER_ACTION(add);
 	REGISTER_ACTION(sub);
+	REGISTER_ACTION(mod);
 	REGISTER_ACTION(dot_clear);
 	REGISTER_ACTION(dot_set);
 	REGISTER_ACTION(show_str);
@@ -342,6 +354,7 @@ void initActions()
 	REGISTER_ACTION(mem_set);
 	REGISTER_ACTION(mem_add);
 	REGISTER_ACTION(mem_sub);
+	REGISTER_ACTION(mem_mod);
 	REGISTER_ACTION(get_dll);
 	REGISTER_ACTION(pause);
 	REGISTER_ACTION(quit);
