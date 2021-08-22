@@ -41,3 +41,13 @@ Good example:
 
 Bad example:
 	quit 0 ; This is a not working comment, will result in error.
+
+
+VirtualByte also has dll support.
+
+	get_dll "test.dll"
+	#test 1 2 3
+	pause
+
+Functions in dll's are called with a # in front of it. If one wants to make dll's themselve for Virtual Byte,
+One should look at "VirtualByteExtension.h" in the github repo.

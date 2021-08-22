@@ -1,5 +1,6 @@
 #ifndef VIRTUAL_BYTE_EVAL
 #define VIRTUAL_BYTE_EVAL
+#include <Windows.h>
 #include <map>
 #include <vector>
 #include <string>

@@ -162,13 +162,20 @@
         },
         "dot": false
     },
+    "get_dll": {
+        "description": "Puts a given dll into the scope.",
+        "args": {
+            "unlimited": "The ascii codes for the dll path."
+        },
+        "dot": false
+    },
     "pause": {
-        "description": "Pauses the program.",
+        "description": "Pauses the program until key is pressed.",
         "args": false,
         "dot": false
     },
     "quit": {
-        "description": "Exits the program with the given exit code.",
+        "description": "Exits the program with the given exit code, should be called if your program uses a dll.",
         "args": {
             "x": "Exit code of the program."
         },

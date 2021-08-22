@@ -3,23 +3,19 @@
 #define ARGUMENT_SIZE_CHECK(x) if(x < args.size()){throwError("Too many arguments", linesEvaled);}else if(x > args.size()){throwError("Not enough arguments", linesEvaled);}
 
 static std::map<std::string, void(*)(std::vector<int>)> actions;
+static std::map<std::string, void(*)(int[], int*)> dllActions;
 static unsigned int linesEvaled = 0;
 static int dotValue = 0;
-static bool dotHasValue = false;
 static std::map<int, int> labels;
+static std::vector<HINSTANCE> openDll;
 
 static void setDot(int value)
 {
-	dotHasValue = true;
 	dotValue = value;
 }
 static int getDot()
 {
-	if (dotHasValue)
-	{
-		return dotValue;
-	}
-	throwError("Dot doesn't have a value.", getCurrentLine());
+	return dotValue;
 }
 unsigned int getLinesEvaled()
 {
@@ -35,6 +31,7 @@ int virtualByteEval(ParsedLine line)
 		return getCurrentLine() + 1;
 	}
 
+	// Setting dot.
 	if (line.dotPos != -1)
 	{
 		line.args[line.dotPos] = getDot();
@@ -42,8 +39,26 @@ int virtualByteEval(ParsedLine line)
 
 	try
 	{
-		function = actions.at(line.action);
-		function(line.args);
+		if (line.action[0] == '#')
+		{
+			void(*f)(int[], int*) = dllActions.at(line.action);
+			int* args = new int[line.args.size()];
+
+			for (unsigned int i = 0; i < line.args.size(); i++)
+			{
+#pragma warning(disable: 6386)
+				args[i] = line.args[i];
+#pragma warning(default: 6386)
+			}
+
+			f(args, &dotValue);
+			delete[] args;
+		}
+		else
+		{
+			function = actions.at(line.action);
+			function(line.args);
+		}
 	}
 	catch (const std::exception&)
 	{
@@ -139,7 +154,7 @@ void sub(std::vector<int> args)
 void dot_clear(std::vector<int> args)
 {
 	ARGUMENT_SIZE_CHECK(0);
-	dotHasValue = false;
+	dotValue = 0;
 }
 void dot_set(std::vector<int> args)
 {
@@ -225,6 +240,63 @@ void mem_sub(std::vector<int> args)
 	setMemory(args[2], value);
 }
 
+// Dll support.
+void get_dll(std::vector<int> args)
+{
+	std::string name;
+	for (int arg : args)
+	{
+		name.push_back((char)arg);
+	}
+	typedef const char*(__stdcall* init_func_t)();
+	HINSTANCE hGetProcIDDLL = LoadLibraryA(name.c_str());
+
+	if (!hGetProcIDDLL)
+	{
+		throwError("Unable to load dll: " + name, getCurrentLine());
+	}
+
+	// Resolve function address here.
+	init_func_t initFunc = (init_func_t)GetProcAddress(hGetProcIDDLL, "initActionsExt");
+	if (!initFunc)
+	{
+		throwError("Could not load init function.", getCurrentLine());
+	}
+
+	// Getting all the function names.
+	const char* funcNames = initFunc();
+	std::vector<std::string> serialized;
+	std::string toPush;
+
+	for (unsigned int i = 0; i < strlen(funcNames); i++)
+	{
+		char c = funcNames[i];
+		if (c == '|')
+		{
+			serialized.push_back(toPush);
+			toPush = "";
+			continue;
+		}
+		toPush.push_back(c);
+	}
+
+	serialized.push_back(toPush);
+
+	// Getting the functions.
+	typedef void (__stdcall* call_func_t)(int[], int*);
+	for (std::string s : serialized)
+	{
+		call_func_t callFunc = (call_func_t)GetProcAddress(hGetProcIDDLL, s.c_str());
+		if (!callFunc)
+		{
+			throwError("Could not load function from dll: " + s, getCurrentLine());
+		}
+		dllActions["#" + s] = (void(*)(int[], int*))callFunc;
+	}
+
+	openDll.push_back(hGetProcIDDLL);
+}
+
 // Pauses the program.
 void pause(std::vector<int> args)
 {
@@ -236,12 +308,17 @@ void pause(std::vector<int> args)
 void quit(std::vector<int> args)
 {
 	ARGUMENT_SIZE_CHECK(1);
+	for (HINSTANCE dll : openDll)
+	{
+		FreeLibrary(dll);
+	}
 	exit(args.at(0));
 }
 
 
 void initActions()
 {
+	// Build-in actions.
 	REGISTER_ACTION(label);
 	REGISTER_ACTION(jmp);
 	REGISTER_ACTION(jmp_if);
@@ -265,6 +342,7 @@ void initActions()
 	REGISTER_ACTION(mem_set);
 	REGISTER_ACTION(mem_add);
 	REGISTER_ACTION(mem_sub);
+	REGISTER_ACTION(get_dll);
 	REGISTER_ACTION(pause);
 	REGISTER_ACTION(quit);
 }
